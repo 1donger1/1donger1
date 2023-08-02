@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "mysort.h": "c",
+        "arraylib.h": "c",
+        "array": "c",
+        "vector": "c",
+        "dynamicarray.h": "c",
+        "string_view": "c",
+        "initializer_list": "c",
+        "utility": "c"
+    }
+}

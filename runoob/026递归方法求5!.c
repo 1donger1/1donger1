@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+
+int fact(int n)
+{
+    if (n == 0 || n == 1)
+        return 1;
+    else
+        return n * fact(n - 1);
+}
+
+int main(void)
+{
+    int i;
+    for (i = 0; i <= 5; i++)
+    {
+        printf("%d!=%d\n", i, fact(i));
+    }
+    return 0;
+}

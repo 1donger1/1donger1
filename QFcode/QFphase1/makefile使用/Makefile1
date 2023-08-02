@@ -1,0 +1,15 @@
+#基础
+main:main.o sub.o sum.o
+	gcc main.o sub.o sum.o -o main
+
+main.o:main.c
+	gcc -c main.c -o main.o
+
+sub.o:sub.c
+	gcc -c sub.c -o sub.o
+
+sum.o:sum.c
+	gcc -c sum.c -o sum.o
+
+clean: 
+	rm *.o main a.out -rf

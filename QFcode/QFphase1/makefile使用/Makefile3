@@ -1,0 +1,22 @@
+#预定义变量
+CC=gcc
+obj=main
+obj1=sub
+obj2=sum
+OBJ=main.o sub.o sum.o
+CFLAGS=-Wall -g
+
+$(obj):$(OBJ)
+	$(CC) $^ -o $@
+
+$(obj).o:$(obj).c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(obj1).o:$(obj1).c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(obj2).o:$(obj2).c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm *.o $(obj) a.out -rf
