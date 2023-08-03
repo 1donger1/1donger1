@@ -13,17 +13,19 @@ int main(int argc, char *argv[])
     }
     Trave(&list);
 
-    printf("remove!\n");
+    InsertIndex(&list, 1, 1);
+
+    // printf("remove!\n");
 
     // while (list.len != 0)
     // {
-    //     // RemoveByIndex(&list, 0);
-    //     RemoveByIndex(&list, list.len-1);
-    //     Trave(&list);
+        // RemoveByIndex(&list, 0);
+        // RemoveByIndex(&list, list.len-1);
+        // Trave(&list);
     // }
     // Trave(&list);
 
-    RemoveByElement(&list, 9);
+    // RemoveByElement(&list, 1);
     Trave(&list);
 
     FreeDLlist(&list);

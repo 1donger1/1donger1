@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
         // InsertHead(&list, i+1);
     }
 
-    // InsertIndex(&list, 7, 0);
+    InsertIndex(&list, 7, 0);
 
     // RemoveByIndex(&list, 2);
     // RemoveByElement(&list, 10);
@@ -20,17 +20,17 @@ int main(int argc, char *argv[])
 
     // printf("按索引查找:%d \n", *FindByIndex(&list, 1));
 
-    int *findvector = FindByElement(&list, 7);
-    if(findvector != NULL)
-    {
-        int *temp = findvector;
-        while(*temp != -1)
-        {
-            printf("find index: %d\n", *temp);
-            temp++;
-        }
-        free(findvector);
-    }
+    // int *findvector = FindByElement(&list, 7);
+    // if(findvector != NULL)
+    // {
+    //     int *temp = findvector;
+    //     while(*temp != -1)
+    //     {
+    //         printf("find index: %d\n", *temp);
+    //         temp++;
+    //     }
+    //     free(findvector);
+    // }
 
     // SetValueByIndex(&list, 144, 1);
     // SetValueByIndex(&list, 144, 2);

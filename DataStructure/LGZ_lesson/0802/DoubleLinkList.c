@@ -71,6 +71,45 @@ void InsertHead(DLlist *list, ElementType element)
     list->len++;
 }
 
+void InsertIndex(DLlist *list, ElementType element,int index)
+{
+    if(index < 0 || index > list->len)
+    {
+        printf("InsertIndex invaild place!\n");
+        return;
+    }
+    LNode *newNode = CreateNode(element);  
+    if (newNode == NULL)
+    {
+        printf("InsertIndex create fail!\n");
+        return;
+    }
+
+    // if (list->len == 0)
+    // {
+    //     newNode->next = list->head;
+    //     list->head = newNode;
+    // }
+    // if(index == 0)
+    // {
+    //     newNode->next = list->head;
+    //     list->head = newNode;
+    // }
+
+    LNode *TravelPoint = list->head;
+    while(index != 0)
+    {
+        TravelPoint = TravelPoint->next;
+        index--;
+    }
+    newNode->next = TravelPoint;
+    newNode->prev = TravelPoint->prev;
+    TravelPoint->prev->next = newNode;
+    TravelPoint->prev = newNode;
+
+    list->len++;
+}
+
 void RemoveByIndex(DLlist *list, int index)
 {
     if (index < 0 || index >= list->len)
@@ -123,6 +162,22 @@ void RemoveByIndex(DLlist *list, int index)
     list->len--;
 }
 
+int FindFirstByElement(DLlist *list, ElementType element)
+{
+    int count = 0;
+    LNode *TravePoint = list->head;
+    while (TravePoint != NULL)
+    {
+        if (TravePoint->data == element)
+        {
+            return count;
+        }
+        count++;
+        TravePoint = TravePoint->next;
+    }
+    return -1;
+}
+
 void RemoveByElement(DLlist *list, ElementType element)
 {
     int index = FindFirstByElement(list, element);
@@ -133,21 +188,6 @@ void RemoveByElement(DLlist *list, ElementType element)
     }
 }
 
-int FindFirstByElement(DLlist *list, ElementType element)
-{
-    int count = 0;
-    LNode *TravePoint = list->head;
-    while(TravePoint != NULL)
-    {
-        if(TravePoint->data == element)
-        {
-            return count;
-        }
-        count++;
-        TravePoint = TravePoint->next;
-    }
-    return -1;
-}
 
 void FreeDLlist(DLlist *list)
 {

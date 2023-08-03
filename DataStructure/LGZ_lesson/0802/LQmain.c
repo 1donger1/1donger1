@@ -1,4 +1,4 @@
-#include "Queue.h"
+#include "LQueue.h"
 #include <stdio.h>
 #include <stdlib.h>
 #define true 1

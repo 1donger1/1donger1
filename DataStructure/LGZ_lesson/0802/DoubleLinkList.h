@@ -27,7 +27,7 @@ void InsertTail(DLlist *list, ElementType element);
 
 void InsertHead(DLlist *list, ElementType element);
 
-void InsertIndex(DLlist *list, ElementType element);
+void InsertIndex(DLlist *list, ElementType element, int index);//待完善
 
 void RemoveByIndex(DLlist *list, int index);
 

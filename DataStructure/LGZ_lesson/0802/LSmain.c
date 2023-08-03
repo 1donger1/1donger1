@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 int IsNum(char c)
 {
     if (c <= '9' && c >= '0')
@@ -68,22 +67,22 @@ char Precade(char ch1, char ch2)
     int i = 0, j = 0;
     switch (ch1)
     {
-    case '-':
+    case '+':
         i = 0;
         break;
-    case '*':
+    case '-':
         i = 1;
         break;
-    case '/':
+    case '*':
         i = 2;
         break;
-    case '(':
+    case '/':
         i = 3;
         break;
-    case ')':
+    case '(':
         i = 4;
         break;
-    case '+':
+    case ')':
         i = 5;
         break;
     case '=':
@@ -177,13 +176,14 @@ int main(int argc, char *argv[])
     {
         if (IsOper(str[i]) == true)
         {
+            // 如果栈空，则直接入栈
             if (IsEmpty(&OPer) == true)
             {
                 Push(&OPer, str[i]);
                 i++;
             }
             else
-            {
+            { // 栈不空，则需要比较运算符的优先级
                 char symbol = Precade(GetTop(&OPer)->data, str[i]);
                 switch (symbol)
                 {
@@ -211,7 +211,7 @@ int main(int argc, char *argv[])
             int num = str[i] - '0';
             Push(&Num, num);
             i++;
-            while (IsNum(str[i]))
+            while (IsNum(str[i])) // 考虑非个位情况
             {
                 // Push(&Num, num);
                 // i++;
@@ -235,7 +235,6 @@ int main(int argc, char *argv[])
     printf("the answer is %d\n", GetTop(&Num)->data);
 
 #endif
-    
+
     return 0;
 }
-
