@@ -8,6 +8,13 @@
         "dynamicarray.h": "c",
         "string_view": "c",
         "initializer_list": "c",
-        "utility": "c"
+        "utility": "c",
+        "lqueue.h": "c",
+        "iostream": "cpp",
+        "linkstack.h": "c",
+        "doublelinklist.h": "c",
+        "stdlib.h": "c",
+        "string": "cpp",
+        "new": "cpp"
     }
 }
