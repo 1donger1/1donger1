@@ -4,7 +4,7 @@
 #define false 0
 #include "DoubleLinkList.h"
 
-#define ElementType int
+// #define ElementType int
 
 typedef struct LinkStack
 {
@@ -18,11 +18,12 @@ LNode *GetTop(LStack *s);
 
 int IsEmpty(LStack *s);
 
-void StackTrave(LStack *s);
+// void StackTrave(LStack *s);
 
 void Push(LStack *s, ElementType element);
 
 ElementType* Pop(LStack *s);
+
 void FreeLStack(LStack *s);
 
 #endif

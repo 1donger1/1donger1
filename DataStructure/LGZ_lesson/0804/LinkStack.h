@@ -23,6 +23,5 @@ void StackTrave(LStack *s);
 void Push(LStack *s, ElementType element);
 
 ElementType* Pop(LStack *s);
-void FreeLStack(LStack *s);
 
 #endif

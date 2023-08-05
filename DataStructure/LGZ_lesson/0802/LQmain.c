@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 
     while(IsQEmpty(&queue) == false)
     {
-        printf("%d ", *Pop(&queue));
+        printf("%d ", *LQPop(&queue));
     }
     printf("\n");
 
