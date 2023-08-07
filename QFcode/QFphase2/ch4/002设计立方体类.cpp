@@ -1,9 +1,7 @@
+
 #include <iostream>
-#include <string>
-#include <vector>
-
+#include <string.h>
 using namespace std;
-
 class Cube
 {
 public:
@@ -17,9 +15,8 @@ public:
     }
     void set_H(int h)
     {
-        W = h;
+        H = h;
     }
-
     int get_L()
     {
         return L;
@@ -32,17 +29,16 @@ public:
     {
         return H;
     }
-
-    // 求体积
+    // 求立方体的体积
     int get_cube_V()
     {
         return L * W * H;
     }
+    // 求立方体面积
     int get_cube_S()
     {
-        return 2 * W * L + 2 * W * H + 2 * H * L;
+        return 2 * W * L + 2 * W * H + 2 * L * H;
     }
-
     // 判断两个立方体是否相等
     bool compare_cube(Cube &c1)
     {
@@ -55,8 +51,9 @@ private:
     int H;
 };
 
-bool compare_cube(Cube &c1, Cube &c2)
+bool comapre_cube(Cube &c1, Cube &c2)
 {
+
     return c1.get_L() == c2.get_L() && c1.get_W() == c2.get_W() && c1.get_H() == c2.get_H();
 }
 
@@ -64,8 +61,8 @@ void test01()
 {
     Cube c1;
     c1.set_L(10);
-    c1.set_H(20);
-    c1.set_W(30);
+    c1.set_W(20);
+    c1.set_H(30);
     cout << c1.get_cube_S() << endl;
     cout << c1.get_cube_V() << endl;
 
@@ -73,9 +70,11 @@ void test01()
     c2.set_L(20);
     c2.set_W(20);
     c2.set_H(30);
-
+    cout << c2.get_cube_V() << endl;
+    cout << c2.get_cube_S() << endl;
     if (c1.compare_cube(c2))
     {
+
         cout << "立方体相等" << endl;
     }
     else
@@ -83,7 +82,7 @@ void test01()
         cout << "立方体不相等" << endl;
     }
 
-    if (compare_cube(c1, c2))
+    if (comapre_cube(c1, c2))
     {
         cout << "立方体相等" << endl;
     }
@@ -92,10 +91,8 @@ void test01()
         cout << "立方体不相等" << endl;
     }
 }
-
-int main(int argc, char **argv)
+int main()
 {
     test01();
-
     return 0;
 }
