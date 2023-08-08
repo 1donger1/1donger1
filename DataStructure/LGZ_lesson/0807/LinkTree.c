@@ -5,11 +5,8 @@
 
 #define true 1
 #define false 0
-
-/// @brief  创建一个新的树节点。
-/// 该函数分配内存并初始化一个新的树节点，然后返回该节点的指针。
-/// 新节点包含了一个数据元素，还会初始化父节点、子节点以及兄弟节点指针。
-/// @param element 节点所包含的数据元素。
+/// @brief 创建一个新的树节点。
+/// @param element节点所包含的数据元素。
 /// @return 返回新创建的树节点的指针。如果内存分配失败，返回NULL。
 LTNode *CreateTreeNode(ElementType element)
 {
