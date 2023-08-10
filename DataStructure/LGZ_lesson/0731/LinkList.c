@@ -17,7 +17,6 @@ int InitLinkList(LinkList *list)
     list->head->data = 0;
     list->head->next = NULL;
     list->len = 0;
-
     return true;
 }
 
