@@ -57,6 +57,33 @@ void Bubblesort(int *a, int n)
         }
     }
 }
+void BubbleSort(int *a, int n)
+{
+    int i, j;
+    int flag;
+    if (n < 2)
+    {
+        return;
+    }
+    for (i = 0; i < n - 1; i++)
+    {
+        flag = 0;
+        for (j = 0; j < n - 1 - i; j++)
+        {
+            if (a[j] > a[j + 1])
+            {
+                swap(&a[j], &a[j + 1]);
+                flag = 1;
+            }
+        }
+        if (flag == 0)
+        {
+            printf("冒泡排序后:");
+            print(a, n);
+            return;
+        }
+    }
+}
 
 void Bubblesort2(int *a, int n)
 {
@@ -169,7 +196,7 @@ void shellsort(int *a, int n)
 
 void quicksort(int *a, int start, int end)
 {
-   
+
     if (start >= end)
     {
         return;
@@ -183,15 +210,15 @@ void quicksort(int *a, int start, int end)
         {
             right--;
         }
-        if(left < right)
+        if (left < right)
         {
             a[left] = a[right];
         }
-        while(left < right && a[left] < temp)
+        while (left < right && a[left] < temp)
         {
             left++;
         }
-        if(left < right)
+        if (left < right)
         {
             a[right] = a[left];
         }
@@ -199,5 +226,33 @@ void quicksort(int *a, int start, int end)
     a[left] = temp;
     quicksort(a, start, left - 1);
     quicksort(a, left + 1, end);
-    
+}
+int part(int *a, int start, int end)
+{
+    int pivot = a[start];
+    while (start < end)
+    {
+        while (start < end && a[end] >= pivot)
+        {
+            end--;
+        }
+        a[start] = a[end];
+        while (start < end && a[start] <= pivot)
+        {
+            start++;
+        }
+        a[end] = a[start];
+    }
+    a[start] = pivot;
+    return start;
+}
+
+void QuickSort(int *a, int start, int end)
+{
+    if (start < end)
+    {
+        int pivotpos = part(a, start, end);
+        QuickSort(a, start, pivotpos - 1);
+        QuickSort(a, pivotpos + 1, end);
+    }
 }

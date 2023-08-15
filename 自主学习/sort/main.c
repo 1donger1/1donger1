@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
     int a[N];
     initnum(a, N);
 
+    // BubbleSort(a, N);
     // Bubblesort(a, N);
     // Bubblesort2(a, N);
 
@@ -28,9 +29,10 @@ int main(int argc, char *argv[])
 
     // shellsort(a, N);
 
+    QuickSort(a, 0, N - 1);
     // quicksort(a, 0, N - 1);
-    // printf("快速排序后:");
-    // print(a, N);
+    printf("快速排序后:");
+    print(a, N);
 
     // test1(a);
     // test2(a);
