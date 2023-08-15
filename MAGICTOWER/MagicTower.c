@@ -83,15 +83,15 @@ void InitTreasuers(struct DynamicArray *array)
         return;
     }
     // 将CreateTreasures()返回值插入数组
-    InsertArray(array, CreateTreasures("宝藏", 100));
-    InsertArray(array, CreateTreasures("珍珠", 50));
-    InsertArray(array, CreateTreasures("珍珠", 50));
-    InsertArray(array, CreateTreasures("珍珠", 50));
-    InsertArray(array, CreateTreasures("药品", 20));
-    InsertArray(array, CreateTreasures("药品", 20));
-    InsertArray(array, CreateTreasures("药品", 20));
-    InsertArray(array, CreateTreasures("药品", 20));
-    InsertArray(array, CreateTreasures("药品", 20));
+    InsertArray(array, CreateTreasure("宝藏", 100));
+    InsertArray(array, CreateTreasure("珍珠", 50));
+    InsertArray(array, CreateTreasure("珍珠", 50));
+    InsertArray(array, CreateTreasure("珍珠", 50));
+    InsertArray(array, CreateTreasure("药品", 20));
+    InsertArray(array, CreateTreasure("药品", 20));
+    InsertArray(array, CreateTreasure("药品", 20));
+    InsertArray(array, CreateTreasure("药品", 20));
+    InsertArray(array, CreateTreasure("药品", 20));
 }
 
 void MakeMove(struct Player *player, char symbol)
