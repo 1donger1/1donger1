@@ -245,7 +245,7 @@ void SetValueByIndex(LinkList *list, ElementType element, int index)
 {
     if (index < 0 || index >= list->len)
     {
-        printf("FindByIndex invaild place!\n");
+        printf("SetValueByIndex invaild place!\n");
         return;
     }
     LNode *TravelPoint = list->head;
