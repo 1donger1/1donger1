@@ -1,14 +1,15 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "../MyLibrary/DynamicArray/DynamicArray.h"
-#include "../MyLibrary/Mysort/Mysort.h"
-#include "../MyLibrary/MyString/MyString.h"
+#include "DynamicArray.h"
+#include "Mysort.h"
+#include "MyString.h"
 #include <time.h>
+#include "Interface.h"
 
-#define Map_Size 5
+#define Map_Size 5 // 定义地图大小
+#define ture 1
 #define false 0
-#define true 1
 
 struct Player
 {
@@ -20,7 +21,7 @@ struct Player
 
 struct Monster
 {
-    MyString name; // 怪兽名字
+    MyString name;
     int HP;
     int attack;
     int x;
@@ -29,18 +30,18 @@ struct Monster
 
 struct Treasure
 {
-    MyString name; // 道具名字
-    int value;     // 道具价值
+    MyString name;
+    int value;
     int x;
     int y;
 };
 
-void InitPlayer(struct Player *player)
+void InitPlayer(struct Player *Player)
 {
-    player->HP = 100;
-    player->attack = 10;
-    player->x = 0;
-    player->y = 0;
+    Player->HP = 100;
+    Player->attack = 999;
+    Player->x = 0;
+    Player->y = 0;
 }
 
 int GetRandNumber(int max)
@@ -60,11 +61,12 @@ struct Monster *CreateMonster(const char *name, int HP, int attack)
     monster->HP = HP;
     monster->attack = attack;
     // Init_MyString(monster->name, name);
-    Initize(&monster->name, name);
+    Initialize(&monster->name, name);
 
     // 不能超过边界范围
     monster->x = GetRandNumber(Map_Size);
     monster->y = GetRandNumber(Map_Size);
+
     return monster;
 }
 
@@ -78,7 +80,7 @@ struct Treasure *CreateTreasures(const char *name, int value)
     }
 
     // Init_MyString(monster->name, name);
-    Initize(&treasure->name, name);
+    Initialize(&treasure->name, name);
     treasure->value = value;
 
     // 不能超过边界范围
@@ -87,7 +89,7 @@ struct Treasure *CreateTreasures(const char *name, int value)
     return treasure;
 }
 
-void InitMonsters(DMarray *array)
+void InitMonsters(DMArray *array)
 {
     if (ArrayInit(array) == false)
     {
@@ -106,7 +108,7 @@ void InitMonsters(DMarray *array)
     InsertArray(array, CreateMonster("哥布林", 20, 5));
 }
 
-void InitTreasures(DMarray *array)
+void InitTreasures(DMArray *array)
 {
     if (ArrayInit(array) == false)
     {
@@ -130,26 +132,26 @@ void MakeMove(struct Player *player, char symbol)
     switch (symbol)
     {
     case 'w':
-        player->x--;
+        (player->x--)%Map_Size;
         break;
 
     case 's':
-        player->x++;
+        (player->x++)%Map_Size;
         break;
 
     case 'a':
-        player->y--;
+        (player->y--) % Map_Size;
         break;
 
     case 'd':
-        player->y++;
+        (player->y++) % Map_Size;
         break;
     default:
         break;
     }
     if (player->x < 0)
     {
-        player->x = 0;
+        player->x = 0 - player->x;///////////
     }
     if (player->x >= Map_Size)
     {
@@ -158,7 +160,7 @@ void MakeMove(struct Player *player, char symbol)
 
     if (player->y < 0)
     {
-        player->y = 0;
+        player->y = 0 - player->y;
     }
     if (player->y >= Map_Size)
     {
@@ -167,15 +169,16 @@ void MakeMove(struct Player *player, char symbol)
 }
 int Battle(struct Player *player, struct Monster *monster)
 {
-    printf("1您遭遇了|%s| 血量:|%d| 攻击力:|%d|", monster->name.string, monster->HP, monster->attack);
-    printf("*********************************************************************");
-    printf("---------------------------------------------------------------------");
-    printf("                         开始战斗！                                   ");
-    printf("---------------------------------------------------------------------");
-    printf("*********************************************************************");
+    printf("1您遭遇了|%s| 血量:|%d| 攻击力:|%d|\n", monster->name.string, monster->HP, monster->attack);
+    // printf("*********************************************************************\n");
+    // printf("---------------------------------------------------------------------\n");
+    // printf("                         开始战斗！                                   \n");
+    // printf("---------------------------------------------------------------------\n");
+    // printf("*********************************************************************\n");
+     Start_Battle();
     while (player->HP > 0 && monster->HP > 0)
     {
-        printf("2您遭遇了|%s| 血量:|%d| 攻击力:|%d|", monster->name.string, monster->HP, monster->attack);
+        // printf("2您遭遇了|%s| 血量:|%d| 攻击力:|%d|\n", monster->name.string, monster->HP, monster->attack);
 
         printf("请选择您要执行的行为:\n");
         printf("1.普通攻击\n");
@@ -184,9 +187,10 @@ int Battle(struct Player *player, struct Monster *monster)
 
         int choice;
         scanf("%d", &choice);
-        printf("---------------------------------------------------------------------");
-        printf("                         战斗报告！                                   ");
-        printf("---------------------------------------------------------------------");
+        // printf("---------------------------------------------------------------------\n");
+        // printf("                         战斗报告！                                   \n");
+        // printf("---------------------------------------------------------------------\n");
+        Battle_Report();
         switch (choice)
         {
         case 1:
@@ -218,7 +222,7 @@ int Battle(struct Player *player, struct Monster *monster)
             else
             {
                 printf("逃跑失败！\n");
-                printf("|%s|对你造成了|%d|伤害", monster->name.string, monster->attack);
+                printf("|%s|对你造成了|%d|伤害\n", monster->name.string, monster->attack);
                 player->HP -= monster->attack;
             }
 
@@ -235,12 +239,14 @@ int Battle(struct Player *player, struct Monster *monster)
         if (monster->HP <= 0)
         {
             monster->HP = 0;
-            printf("你|%s|击败了！\n", monster->name.string);
+            printf("你击败了|%s|!\n", monster->name.string);
             return true;
         }
-        printf("-------------------------战斗结束！-----------------------------------");
-        printf("---------------------------------------------------------------------");
+        // printf("-------------------------战斗结束！-----------------------------------\n");
+        // printf("---------------------------------------------------------------------\n");
+        Battle_End();
     }
+    // system("clear");
 }
 
 void InitBoard(char (*p)[Map_Size]) // 用数组指针指向二维数组
@@ -278,28 +284,28 @@ void PrintMap(char (*p)[Map_Size], struct Player *player)
 int main(int argc, char *argv[])
 {
     srand(time(NULL)); // 用时间定随机数
+    system("clear");
 
-    printf("---------------------------------------------------------------------\n");
-    printf("                        欢迎来到魔塔世界                               \n");
-    printf("---------------------------------------------------------------------\n");
-    // system("clear");
+    WelCome();
+    // printf("---------------------------------------------------------------------\n");
+    // printf("                        欢迎来到魔塔世界                               \n");
+    // printf("---------------------------------------------------------------------\n");
     char board[Map_Size][Map_Size];
     InitBoard(board);
 
     struct Player player;
     InitPlayer(&player);
 
-    DMarray monsters = {NULL, 10, 0};
+    DMArray monsters = {NULL, 10, 0};
     InitMonsters(&monsters);
 
-    DMarray treasures = {NULL, 10, 0};
+    DMArray treasures = {NULL, 10, 0};
     InitTreasures(&treasures);
 
     while (1)
     {
         PrintMap(board, &player);
         printf("你当前所在的位置是<%d,%d>\n", player.x + 1, player.y + 1);
-
         for (int i = 0; i < monsters.len; i++)
         {
             struct Monster *monster = (struct Monster *)monsters.dp[i];
@@ -321,7 +327,7 @@ int main(int argc, char *argv[])
         char choice;
         scanf("%c", &choice);
         MakeMove(&player, choice);
-        system("clear");
+        // system("clear");
     }
 
     for (int i = 0; i < monsters.len; i++)
