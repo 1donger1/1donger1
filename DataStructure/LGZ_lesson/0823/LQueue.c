@@ -48,9 +48,7 @@ LNode *GetFront(LQueue *lq)
     return lq->queue.head;
 }
 
-int GetQueueLen(LQueue *lq);
-
-int GetQueueLen(LQueue *lq)
+int GetLQueueLen(LQueue *lq)
 {
     return lq->queue.len;
 }

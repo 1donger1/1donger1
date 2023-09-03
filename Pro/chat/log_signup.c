@@ -1,18 +1,9 @@
+/********************log_signup.c***************************/
 #include "StdFile.h"
 #include "DoubleLinkList.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-// void Print(ElementType value)
-// {
-//     char *content = (char *)value;
-//     printf("%s\n", content);
-// }
-// void freeStr(ElementType value)
-// {
-//     free(value);
-// }
 
 static DLlist UserList;
 
@@ -66,6 +57,39 @@ int Login(const char *name, const char *passwd)
     return 0;
 }
 
+int Signup(const char *name, const char *passwd)
+{
+    // 检查用户名是否已存在
+    LNode *TravelPoint = UserList.head;
+    while (TravelPoint != NULL)
+    {
+        struct User *user = (struct User *)TravelPoint->data;
+        if (strcmp(user->UserName, name) == 0)
+        {
+            return 0; // 用户名已存在，注册失败
+        }
+        TravelPoint = TravelPoint->next;
+    }
+
+    // 创建用户结构体并插入到用户列表
+    struct User *newUser = CreateUser(name, passwd);
+    InsertTail(&UserList, newUser);
+
+    // 将新用户信息写入文件
+    FILE *file = fopen("test.txt", "a"); // 以追加模式打开文件
+    if (file != NULL)
+    {
+        fprintf(file, "%s=%s\n", newUser->UserName, newUser->Passwd);
+        fclose(file);
+        return 1; // 注册成功
+    }
+    else
+    {
+        FreeUser(newUser); // 写入文件失败，释放内存
+        return -1;         // 注册失败
+    }
+}
+
 void Print(ElementType element)
 {
     struct User *user = (struct User *)element;
@@ -74,36 +98,6 @@ void Print(ElementType element)
 
 int main(int argc, char *argv[])
 {
-#if 0
-    // char *content = LoardFromFile("file.txt");
-    // if (content != NULL)
-    // {
-    //     printf("%s\n", content);
-    //     free(content);
-    // }
-
-    // DLlist *list = GetLineFromFile("file.txt");
-    // Trave(list, Print);
-
-    // FreeDLlist(list, freeStr);
-    // free(list);
-
-    // char *str = "hello world";
-    // WriteToFile("test.txt", str, strlen(str));
-
-    // DLlist *list = GetLineFromFile("test.txt");
-    // WriteLineToFile("test2.txt", list);
-
-    // char temp[100] = "user=test";
-    // char *user = strtok(temp, "=");
-    // char *name = strtok(NULL, "=");
-
-    // printf("%s %s\n", user, name);
-
-    // CopyFile("test.txt", "test2.txt");
-
-#endif
-#if 1
     if (argc != 3)
     {
         printf("invaild numbers!\n");
@@ -112,19 +106,8 @@ int main(int argc, char *argv[])
     InitDLlist(&UserList);
 
     DLlist *list = GetLineFromFile("test.txt");
-    Trave(list, Strtok);
+    Travel(list, Strtok);
 
-    // LNode *TravelPoint = UserList.head;
-    // while (TravelPoint != NULL)
-    // {
-    //     struct User *user = (struct User *)TravelPoint->data;
-    //     if (user->UserName== argv[1] && user->Passwd == argv[2])
-    //     {
-    //         return 1;
-    //     }
-    // }
-
-    // Trave(&UserList, Print);
 
     if (Login(argv[1], argv[2]) == 1)
     {
@@ -135,10 +118,5 @@ int main(int argc, char *argv[])
         printf("login fail\n");
     }
 
-    // struct User *newUser = CreateUser("chuang", "619");
-    // InsertTail(&UserList, newUser);
-
-    // WriteLineToFile("test.txt", &UserList);
-#endif
     return 0;
 }

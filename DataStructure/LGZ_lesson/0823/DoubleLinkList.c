@@ -27,6 +27,11 @@ LNode *CreateNode(ElementType element)
     return newNode;
 }
 
+int GetListLen(DLlist *list)
+{
+    return list->len;
+}
+
 void InsertTail(DLlist *list, ElementType element)
 {
     LNode *newNode = CreateNode(element);
@@ -68,45 +73,6 @@ void InsertHead(DLlist *list, ElementType element)
         newNode->next = list->head;
         list->head = newNode;
     }
-    list->len++;
-}
-
-void InsertIndex(DLlist *list, ElementType element, int index)
-{
-    if (index < 0 || index > list->len)
-    {
-        printf("InsertIndex invaild place!\n");
-        return;
-    }
-    LNode *newNode = CreateNode(element);
-    if (newNode == NULL)
-    {
-        printf("InsertIndex create fail!\n");
-        return;
-    }
-
-    // if (list->len == 0)
-    // {
-    //     newNode->next = list->head;
-    //     list->head = newNode;
-    // }
-    // if(index == 0)
-    // {
-    //     newNode->next = list->head;
-    //     list->head = newNode;
-    // }
-
-    LNode *TravelPoint = list->head;
-    while (index != 0)
-    {
-        TravelPoint = TravelPoint->next;
-        index--;
-    }
-    newNode->next = TravelPoint;
-    newNode->prev = TravelPoint->prev;
-    TravelPoint->prev->next = newNode;
-    TravelPoint->prev = newNode;
-
     list->len++;
 }
 
@@ -181,33 +147,20 @@ int FindFirstByElement(DLlist *list, ElementType element)
 void RemoveByElement(DLlist *list, ElementType element)
 {
     int index = FindFirstByElement(list, element);
-    while (index != -1)
+    while(index != -1)
     {
         RemoveByIndex(list, index);
         index = FindFirstByElement(list, element);
     }
 }
 
-// void FreeDLlist(DLlist *list)
-// {
-//     while (list->head != NULL)
-//     {
-//         LNode *freenode = list->head;
-//         list->head = list->head->next;
-//         free(freenode);
-//     }
 
-//     list->head = NULL;
-//     list->tail = NULL;
-//     list->len = 0;
-// }
-void FreeDLlist(DLlist *list, void (*func)(ElementType))
+void FreeDLlist(DLlist *list)
 {
     while (list->head != NULL)
     {
         LNode *freenode = list->head;
         list->head = list->head->next;
-        free(freenode->data);
         free(freenode);
     }
 
@@ -236,22 +189,3 @@ void FreeDLlist(DLlist *list, void (*func)(ElementType))
 //     }
 //     printf("\n");
 // }
-void Trave(DLlist *list, void (*func)(ElementType))
-{
-    // printf("Next: ");
-    LNode *TravePoint = list->head;
-    while (TravePoint != NULL)
-    {
-        if (func != NULL)
-        {
-            func(TravePoint->data);
-        }
-        TravePoint = TravePoint->next;
-    }
-    printf("\n");
-}
-
-int GetListLen(DLlist *list)
-{
-    return list->len;
-}

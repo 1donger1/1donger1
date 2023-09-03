@@ -126,10 +126,8 @@ int insert_view(struct message *msg)
 
 /**
  * @brief 设置数据库，创建用户表和视图表
- *
  * @return int 返回设置数据库操作的执行结果，SUCCESS表示设置成功，FAILURE表示设置失败
  */
-
 /*总体来说，这段代码是用来设置数据库的，
 它通过打开数据库连接、执行SQL语句来创建用户表和视图表，从而实现了数据库的设置。
 需要注意的是，在创建用户表时，使用了一个主键id来确保每个用户的唯一性；
@@ -457,15 +455,10 @@ void logged(int connfd, struct message *MSG)
 
 
 /**
-
 @brief 查找在线用户链表中是否存在要发送消息的目标用户，若存在则发送消息给目标用户并返回其套接字描述符
-
 @param toid 要发送消息的目标用户ID
-
 @param MSG 待发送的消息结构体
-
 @param connfd 发送消息的客户端套接字描述符
-
 @return int 若查找成功则返回目标用户的套接字描述符，否则返回FAILURE
 */
 int f_id(char *toid, struct message *MSG, int connfd)

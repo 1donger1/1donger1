@@ -3,19 +3,21 @@
 
 #define ElementType int
 
+// 定义双向链表节点结构体
 typedef struct Node
 {
-    ElementType data;
-    struct Node *next;
-    struct Node *prev;
-} LNode;
+    ElementType data;  // 节点存储的数据
+    struct Node *next; // 指向下一个节点的指针
+    struct Node *prev; // 指向前一个节点的指针
+} LNode;               // 节点类型的别名
 
+// 定义双向链表结构体
 typedef struct DoubleLinkList
 {
-    struct Node *head;
-    struct Node *tail;
-    int len;
-} DLlist;
+    LNode *head; // 指向链表头节点的指针
+    LNode *tail; // 指向链表尾节点的指针
+    int len;           // 链表长度
+} DLlist;              // 双向链表类型的别名
 
 int InitDLlist(DLlist *list);
 

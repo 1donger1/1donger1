@@ -55,3 +55,7 @@ void ClearThread(Thread *t)
     free(t);
 }
 
+unsigned long int GetThreadId(Thread *t)
+{
+    return t->threadID;
+}

@@ -27,7 +27,7 @@ struct User *CreaterUser(char *name, char *pwd)
 
 int IsEqualID(const char *FilePath, char *userName)
 {
-    FILE *file = fopen(FilePath, "r");
+    FILE *file = fopen(FilePath, "r+");
     if (file == NULL)
     {
         printf("fopen error!\n");
