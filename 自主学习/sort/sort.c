@@ -227,6 +227,7 @@ void quicksort(int *a, int start, int end)
     quicksort(a, start, left - 1);
     quicksort(a, left + 1, end);
 }
+
 int part(int *a, int start, int end)
 {
     int pivot = a[start];
@@ -246,7 +247,6 @@ int part(int *a, int start, int end)
     a[start] = pivot;
     return start;
 }
-
 void QuickSort(int *a, int start, int end)
 {
     if (start < end)

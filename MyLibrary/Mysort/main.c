@@ -4,7 +4,7 @@
 int main()
 {
     int a[] = {5, 8, 3, 1, 9, 2};
-    InserSort(a, ArrayLen(a));
+    InsertSort(a, ArrayLen(a));
 
     for (int i = 0; i < ArrayLen(a); i++)
     {

@@ -29,8 +29,8 @@ int main(int argc, char *argv[])
 
     // shellsort(a, N);
 
-    QuickSort(a, 0, N - 1);
-    // quicksort(a, 0, N - 1);
+    // QuickSort(a, 0, N - 1);
+    quicksort(a, 0, N - 1);
     printf("快速排序后:");
     print(a, N);
 

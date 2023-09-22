@@ -39,7 +39,7 @@ void BubbleSort(int *a, int len, int (*Rule)(int, int))
     }
 }
 
-void InserSort(int *a, int len)
+void InsertSort(int *a, int len)
 {
     for (int i = 1; i < len; i++)
     {
@@ -112,58 +112,33 @@ void ChooseSort2(int *a, int len)
     }
 }
 
-// void Quicksort(int *a, int start, int end)
-// {
-//     int temp = a[start];
-//     int left = start;
-//     int right = end;
-//     while (left < right)
-//     {
-//         while (left < right && temp < a[right])
-//         {
-//             right--;
-//         }
-//         if (left < right)
-//         {
-//             a[left] = a[right];
-//             left++;
-//         }
-//         while (left < right && temp > a[left])
-//         {
-//             left++;
-//         }
-//         if (left < right)
-//         {
-//             a[left] = a[right];
-//             right--;
-//         }
-//         while (temp > a[left])
-//         {
-//             left++;
-//         }
-//         a[left] = temp;
-
-//         Quicksort(a, start, left - 1);
-//         Quicksort(a, right + 1, end);
-//     }
-// }
 void Quicksort(int *a, int start, int end)
 {
     if (start >= end)
+    {
         return;
+    }
     int temp = a[start];
     int left = start;
     int right = end;
     while (left < right)
     {
         while (left < right && a[right] >= temp)
+        {
             right--;
+        }
         if (left < right)
+        {
             a[left] = a[right];
+        }
         while (left < right && a[left] < temp)
+        {
             left++;
+        }
         if (left < right)
+        {
             a[right] = a[left];
+        }
     }
     a[left] = temp;
     Quicksort(a, start, left - 1);
